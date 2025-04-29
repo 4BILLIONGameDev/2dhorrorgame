@@ -48,7 +48,8 @@ public class Player : MonoBehaviour
 
         float elapsedTime = 0f;
         float moveDuration = blockSize / moveSpeed;  // 블럭 하나 이동하는 데 걸리는 시간
-
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        rigidbody.MoveRotation(angle - 90f);
         while (elapsedTime < moveDuration)
         {
             rigidbody.MovePosition(Vector2.Lerp(startPos, targetPos, elapsedTime / moveDuration));
@@ -66,6 +67,8 @@ public class Player : MonoBehaviour
         {
             dir.y = 0f; // 가로 우선
         }
+       
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
