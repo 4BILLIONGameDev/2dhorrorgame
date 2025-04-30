@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 3f;
     public float blockSize = 1f;  // 블럭 크기 (1칸)
 
-    private GameObject currentTarget = null;
+    private IInteractable2D currentInteractTarget = null;
     private Rigidbody2D rigidbody;
     private Vector2 inputDirection;
     private bool isMoving = false;
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+       
         if (!isMoving)
         {
             inputDirection = InputManager.Instance.GetMovementInput().normalized;
@@ -34,8 +35,7 @@ public class Player : MonoBehaviour
 
         if (InputManager.Instance.GetInteractPressed())
         {
-            if (currentTarget != null)
-                interact(currentTarget);
+            interact();
         }
     }
 
@@ -73,17 +73,50 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        currentTarget = other.gameObject;
+        var interactable = other.GetComponent<IInteractable2D>();
+        if (interactable != null)
+        {
+            currentInteractTarget = interactable;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        currentTarget = null;
+        var interactable = other.GetComponent<IInteractable2D>();
+        if (interactable != null && interactable == currentInteractTarget)
+        {
+            currentInteractTarget = null;
+        }
     }
 
-    void interact(GameObject Object)
+    void interact()
     {
-        if (Object.CompareTag("Box"))
-            Destroy(Object);
+
+
+        Vector2 lookDirection = transform.right.normalized; // 머리 방향 기준
+        Vector2 center = (Vector2)transform.position + lookDirection * 1.2f;
+
+        Collider2D hit = Physics2D.OverlapCircle(center, 0.5f); // 반지름 0.5 정도
+
+        Debug.DrawLine(transform.position, center, Color.green, 0.2f);
+        Debug.DrawRay(center, Vector2.up * 0.1f, Color.cyan, 0.2f); // 검사 중심 표시
+
+        if (hit != null)
+        {
+            var interactable = hit.GetComponent<IInteractable2D>();
+            if (interactable != null)
+            {
+                interactable.OnInteract();
+                Debug.Log("인터랙션 성공: " + hit.name);
+            }
+            else
+            {
+                Debug.Log("인터페이스 없음: " + hit.name);
+            }
+        }
+        else
+        {
+            Debug.Log("앞에 아무것도 없어~");
+        }
     }
 }

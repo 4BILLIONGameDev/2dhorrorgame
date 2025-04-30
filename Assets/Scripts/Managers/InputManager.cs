@@ -6,12 +6,18 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
 
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
+    public bool GetMouseClick()
+    {
+        // 마우스 왼쪽 클릭
+        return Input.GetMouseButtonDown(0);
+    }
     public Vector2 GetMovementInput()
     {
         //상하 좌우 이동
