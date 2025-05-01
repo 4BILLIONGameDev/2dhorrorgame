@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-
     public GameObject optionOverlay;
     private bool isOptionOpen = false;
 
@@ -26,11 +25,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-       
-
-
         optionOverlay.SetActive(false);
-        
     }
 
 
@@ -50,5 +45,21 @@ public class UIManager : MonoBehaviour
     {
         isOptionOpen = !isOptionOpen;
         optionOverlay.SetActive(isOptionOpen);
+    }
+    public void OnCloseClicked()
+    {
+        optionOverlay.SetActive(false);
+    }
+
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+    }
+    public static void SetFullscreen(bool isFullscreen)
+    {
+        Debug.Log(" 토글에서 전달된 값: " + isFullscreen);   
+        Debug.Log(" 현재 Screen.fullScreen 상태: " + Screen.fullScreen);
+
+        Screen.fullScreen = isFullscreen;
     }
 }
