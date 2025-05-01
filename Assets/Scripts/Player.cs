@@ -12,21 +12,24 @@ public class Player : MonoBehaviour
     private IInteractable2D currentInteractTarget = null;
     private Rigidbody2D rigidbody;
     private Vector2 inputDirection;
+    private Animator animator;
     private bool isMoving = false;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
     }
 
     void Update()
     {
-       
+        animator.SetFloat("MoveSpeed", inputDirection.sqrMagnitude);
+
+
         if (!isMoving)
         {
             inputDirection = InputManager.Instance.GetMovementInput().normalized;
             dirDetermine(ref inputDirection);
-
             if (inputDirection != Vector2.zero)
             {
                 StartCoroutine(MoveByBlock(inputDirection));
@@ -41,6 +44,25 @@ public class Player : MonoBehaviour
 
     IEnumerator MoveByBlock(Vector2 moveDirection)
     {
+        if (moveDirection.x > 0)
+        {
+            //오른쪽이동
+            animator.SetInteger("Direction", 3);
+        }
+        else if (moveDirection.x < 0)
+        {
+            //왼쪽이동
+            animator.SetInteger("Direction", 2);
+        }
+        else if (moveDirection.y > 0)
+        {
+            //위쪽이동
+        }
+        else if (moveDirection.y < 0)
+        {
+            //아래이동
+            animator.SetInteger("Direction", 1);
+        }
         isMoving = true;
 
         Vector2 startPos = rigidbody.position;
