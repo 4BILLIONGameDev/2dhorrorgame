@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject optionOverlay;
     private bool isOptionOpen = false;
+    public Toggle fullscreenToggle;
+
 
     private void Awake()
     {
@@ -25,8 +27,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        fullscreenToggle.isOn = Screen.fullScreen; // 현재 상태 반영
+        fullscreenToggle.onValueChanged.AddListener(SetFullscreen); // 연결
         optionOverlay.SetActive(false);
-    }
+        }
 
 
     public void OnStartButtonClicked()
@@ -55,11 +59,14 @@ public class UIManager : MonoBehaviour
     {
         AudioListener.volume = volume;
     }
-    public static void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
-        Debug.Log(" 토글에서 전달된 값: " + isFullscreen);   
-        Debug.Log(" 현재 Screen.fullScreen 상태: " + Screen.fullScreen);
+        Debug.Log("토글에서 전달된 값: " + isFullscreen);
 
-        Screen.fullScreen = isFullscreen;
+        int width = Screen.currentResolution.width;
+        int height = Screen.currentResolution.height;
+        Screen.SetResolution(width, height, isFullscreen);
+
+        Debug.Log("현재 Screen.fullScreen 상태: " + Screen.fullScreen);
     }
 }
