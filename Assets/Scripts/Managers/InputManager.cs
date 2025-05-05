@@ -30,9 +30,15 @@ public class InputManager : MonoBehaviour
         return Input.GetKeyDown(KeyCode.E);
     }
 
+    public bool GetInventoryPressed()
+    {
+        //탭 키 상호작용
+        return Input.GetKeyDown(KeyCode.I); 
+    }
+
     public bool GetObserverSwitch()
     {
         //탭 키 상호작용
-        return Input.GetKeyDown(KeyCode.Tab); 
+        return Input.GetKeyDown(KeyCode.Tab);
     }
 }
