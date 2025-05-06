@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 54344798}
   - component: {fileID: 54344799}
   m_Layer: 5
-  m_Name: SFXVolume
+  m_Name: sfxVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,17 +338,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 1824762310}
   m_HandleRect: {fileID: 644680040}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1309544580}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnSFXVolumeChanged
-        m_Mode: 4
+      - m_Target: {fileID: 904891812}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetSFXVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59424403}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2157,6 +2157,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1432749828}
   sfxSource: {fileID: 461560718}
+  masterSlider: {fileID: 0}
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  masterMuteToggle: {fileID: 0}
+  bgmMuteToggle: {fileID: 0}
+  sfxMuteToggle: {fileID: 0}
 --- !u!4 &904891813
 Transform:
   m_ObjectHideFlags: 0
@@ -2552,18 +2558,18 @@ RectTransform:
   - {fileID: 1266220857}
   - {fileID: 1305500774}
   - {fileID: 873433960}
+  - {fileID: 1121590612}
   - {fileID: 1851198205}
   - {fileID: 1291509438}
   - {fileID: 54344798}
-  - {fileID: 1262526071}
   - {fileID: 1596858414}
+  - {fileID: 1262526071}
   - {fileID: 1829170780}
-  - {fileID: 1121590612}
   m_Father: {fileID: 1295675010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -11, y: 22}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987784474
@@ -3090,7 +3096,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.1, y: -237.6}
+  m_AnchoredPosition: {x: -2.0999756, y: -237.60004}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262526072
@@ -3140,10 +3146,22 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1309544580}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnBGMMuteToggleChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
       - m_Target: {fileID: 904891812}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: SetBGMVolume
-        m_Mode: 4
+        m_MethodName: ToggleBGMMute
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3152,7 +3170,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1266220856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,7 +3318,7 @@ GameObject:
   - component: {fileID: 1291509438}
   - component: {fileID: 1291509439}
   m_Layer: 5
-  m_Name: BGMVolume
+  m_Name: bgmVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3325,7 +3343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: -90.1}
+  m_AnchoredPosition: {x: 25, y: -90.10004}
   m_SizeDelta: {x: 306.4893, y: 62.8412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291509439
@@ -3372,17 +3390,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 2082573736}
   m_HandleRect: {fileID: 1925259391}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1309544580}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnBGMVolumeChanged
-        m_Mode: 4
+      - m_Target: {fileID: 904891812}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetBGMVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3660,10 +3678,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionOverlay: {fileID: 987784472}
   fullscreenToggle: {fileID: 873433961}
-  soundManager: {fileID: 904891812}
-  masterMuteToggle: {fileID: 1596858415}
-  bgmMuteToggle: {fileID: 1262526072}
-  sfxMuteToggle: {fileID: 1829170781}
 --- !u!4 &1309544581
 Transform:
   m_ObjectHideFlags: 0
@@ -4356,7 +4370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.1, y: -207}
+  m_AnchoredPosition: {x: -2.0999756, y: -207}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1596858415
@@ -4406,10 +4420,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1309544580}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnMasterMuteToggleChanged
-        m_Mode: 6
+      - m_Target: {fileID: 904891812}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ToggleMasterMute
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4418,7 +4432,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1599161923
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,7 +5174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.1, y: -283.1}
+  m_AnchoredPosition: {x: -4.0999756, y: -283.10004}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1829170781
@@ -5210,10 +5224,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1309544580}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnSFXMuteToggleChanged
-        m_Mode: 6
+      - m_Target: {fileID: 904891812}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ToggleSFXMute
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5222,7 +5236,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1840093654
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,7 +5323,7 @@ GameObject:
   - component: {fileID: 1851198205}
   - component: {fileID: 1851198206}
   m_Layer: 5
-  m_Name: MasterVolume
+  m_Name: masterVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5381,17 +5395,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 844257976}
   m_HandleRect: {fileID: 1599161924}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1309544580}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnMasterVolumeChanged
-        m_Mode: 4
+      - m_Target: {fileID: 904891812}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetMasterVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

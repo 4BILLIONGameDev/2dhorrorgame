@@ -1,48 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance { get; private set; }
 
     public AudioSource bgmSource;
-public AudioSource sfxSource;
+    public AudioSource sfxSource;
 
-private float masterVolume = 1f;
-private float bgmVolume = 1f;
-private float sfxVolume = 1f;
+    [Header("UI Components")]
+    public Slider masterSlider;
+    public Slider bgmSlider;
+    public Slider sfxSlider;
+
+    public Toggle masterMuteToggle;
+    public Toggle bgmMuteToggle;
+    public Toggle sfxMuteToggle;
+
+    private float masterVolume = 1f;
+    private float bgmVolume = 1f;
+    private float sfxVolume = 1f;
 
     private bool isMasterMuted = false;
     private bool isBGMMuted = false;
     private bool isSFXMuted = false;
 
-// 마스터 볼륨
-public void SetMasterVolume(float volume)
-{
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        // 초기값 반영
+        ApplyVolumes();
+
+        // 슬라이더 리스너 등록
+        if (masterSlider != null)
+            masterSlider.onValueChanged.AddListener(SetMasterVolume);
+        if (bgmSlider != null)
+            bgmSlider.onValueChanged.AddListener(SetBGMVolume);
+        if (sfxSlider != null)
+            sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+        // 토글 리스너 등록
+        if (masterMuteToggle != null)
+            masterMuteToggle.onValueChanged.AddListener(ToggleMasterMute);
+        if (bgmMuteToggle != null)
+            bgmMuteToggle.onValueChanged.AddListener(ToggleBGMMute);
+        if (sfxMuteToggle != null)
+            sfxMuteToggle.onValueChanged.AddListener(ToggleSFXMute);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
         masterVolume = Mathf.Clamp01(volume);
-        isMasterMuted = false;
+        if (masterMuteToggle != null)
+            masterMuteToggle.isOn = false;
         ApplyVolumes();
     }
 
-    // BGM/SFX 볼륨
     public void SetBGMVolume(float volume)
     {
         bgmVolume = Mathf.Clamp01(volume);
-        isBGMMuted = false;  // 슬라이더 조작 시 음소거 해제
+        if (bgmMuteToggle != null)
+            bgmMuteToggle.isOn = false;
         ApplyVolumes();
     }
 
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
-        isSFXMuted = false;  // 슬라이더 조작 시 음소거 해제
+        if (sfxMuteToggle != null)
+            sfxMuteToggle.isOn = false;
         ApplyVolumes();
     }
+
     public void ToggleMasterMute(bool isMuted)
     {
         isMasterMuted = isMuted;
         ApplyVolumes();
     }
+
     public void ToggleBGMMute(bool isMuted)
     {
         isBGMMuted = isMuted;
@@ -54,7 +95,7 @@ public void SetMasterVolume(float volume)
         isSFXMuted = isMuted;
         ApplyVolumes();
     }
-    // 내부 처리
+
     private void ApplyVolumes()
     {
         float master = isMasterMuted ? 0f : masterVolume;
@@ -65,5 +106,4 @@ public void SetMasterVolume(float volume)
         if (sfxSource != null)
             sfxSource.volume = (isSFXMuted ? 0f : sfxVolume) * master;
     }
-
 }
