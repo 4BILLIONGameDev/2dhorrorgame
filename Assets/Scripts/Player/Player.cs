@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public float blockSize = 1f;  // 블럭 크기 (1칸)
+    public GameObject inventoryUI;
+
+
 
     private IInteractable2D currentInteractTarget = null;
     private Rigidbody2D rigidbody;
@@ -40,6 +43,12 @@ public class Player : MonoBehaviour
         {
             interact();
         }
+
+        if (InputManager.Instance.GetInventoryPressed())
+        {
+            inventoryShow();
+        }
+
     }
 
     IEnumerator MoveByBlock(Vector2 moveDirection)
@@ -57,6 +66,7 @@ public class Player : MonoBehaviour
         else if (moveDirection.y > 0)
         {
             //위쪽이동
+            animator.SetInteger("Direction", 4);
         }
         else if (moveDirection.y < 0)
         {
@@ -140,5 +150,11 @@ public class Player : MonoBehaviour
         {
             Debug.Log("앞에 아무것도 없어~");
         }
+    }
+
+    void inventoryShow()
+    {
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
+
     }
 }

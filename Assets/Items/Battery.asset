@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53e0c10822a80ac43ac7d4f1fa607765, type: 3}
-  m_Name: RustyKey
+  m_Name: Battery
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  description: 
-  isKeyItem: 0
+  itemName: Battery
+  icon: {fileID: 8957324059118975939, guid: b944fea9bc6d1864ebbe710bc6e5524f, type: 3}
+  description: "\"\uBC30\uD130\uB9AC\""
+  maxStack: 5
