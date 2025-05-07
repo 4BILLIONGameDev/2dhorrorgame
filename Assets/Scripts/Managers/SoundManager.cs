@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
-
+    //오디오 소스
     public AudioSource bgmSource;
     public AudioSource sfxSource;
 
@@ -54,7 +54,7 @@ public class SoundManager : MonoBehaviour
             sfxMuteToggle.onValueChanged.AddListener(ToggleSFXMute);
     }
 
-    public void SetMasterVolume(float volume)
+    public void SetMasterVolume(float volume)// 사운드 슬라이스 시작
     {
         masterVolume = Mathf.Clamp01(volume);
         if (masterMuteToggle != null)
@@ -78,7 +78,7 @@ public class SoundManager : MonoBehaviour
         ApplyVolumes();
     }
 
-    public void ToggleMasterMute(bool isMuted)
+    public void ToggleMasterMute(bool isMuted)//사운드 토글
     {
         isMasterMuted = isMuted;
         ApplyVolumes();
@@ -98,12 +98,27 @@ public class SoundManager : MonoBehaviour
 
     private void ApplyVolumes()
     {
-        float master = isMasterMuted ? 0f : masterVolume;
+        float master = 1f;
+
+        if (isMasterMuted)
+            master = 0f;
+        else
+            master = masterVolume;
 
         if (bgmSource != null)
-            bgmSource.volume = (isBGMMuted ? 0f : bgmVolume) * master;
+        {
+            if (isBGMMuted)
+                bgmSource.volume = 0f * master;           
+            else
+                bgmSource.volume = bgmVolume * master;
+        }
 
         if (sfxSource != null)
-            sfxSource.volume = (isSFXMuted ? 0f : sfxVolume) * master;
+        {
+            if (isSFXMuted)
+                sfxSource.volume = 0f * master;
+            else
+                sfxSource.volume = sfxVolume * master;
+        }
     }
 }
