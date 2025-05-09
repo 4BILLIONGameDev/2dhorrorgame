@@ -41,4 +41,9 @@ public class InputManager : MonoBehaviour
         //탭 키 상호작용
         return Input.GetKeyDown(KeyCode.Tab);
     }
+    public bool GetOptionPressed()
+    {
+        //ESC 키 상호작용
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
 }

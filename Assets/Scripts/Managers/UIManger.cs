@@ -7,13 +7,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public GameObject saveOverlay;
-    private bool isSaveOpen = false;
-
     public GameObject optionOverlay;
     private bool isOptionOpen = false;
 
     public Toggle fullscreenToggle;
+
+    public GameObject saveLoadUIPrefab;
+
+    private GameObject currentUIInstance;
     private void Awake()
     {
         if (Instance == null)
@@ -30,11 +31,42 @@ public class UIManager : MonoBehaviour
         fullscreenToggle.isOn = Screen.fullScreen; // 현재 상태 반영
         fullscreenToggle.onValueChanged.AddListener(SetFullscreen); // 연결
         optionOverlay.SetActive(false);
-        saveOverlay.SetActive(false);
+        
+    }
+    void Update()
+    {
+        // InputManager에서 ESC 키 입력 감지
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentUIInstance == null)
+                ShowSaveLoadUI();
+            else
+                CloseSaveLoadUI();
+        }
+    }
+    void ShowSaveLoadUI()
+    {
+        Debug.Log("로드");
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas != null)
+        {
+            currentUIInstance = Instantiate(saveLoadUIPrefab, canvas.transform);
+        }
+        else
+        {
+            Debug.LogError("씬에 Canvas가 없습니다.");
+        }
+    }
+    public void CloseSaveLoadUI()
+    {
+        if (currentUIInstance != null)
+        {
+            Destroy(currentUIInstance);
+            currentUIInstance = null;
+        }
     }
 
-
-    public void OnStartButtonClicked()//시작버튼
+public void OnStartButtonClicked()//시작버튼
     {
         Debug.Log("게임 시작 버튼 클릭!");
 
@@ -55,12 +87,6 @@ public class UIManager : MonoBehaviour
     {
         optionOverlay.SetActive(false);
     }
-    public void ToggleSavePanel()//세이브
-    {
-        isSaveOpen = !isSaveOpen;
-        saveOverlay.SetActive(isSaveOpen);
-    }
-
 
     public void SetFullscreen(bool isFullscreen)//전체화면
     {
