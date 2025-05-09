@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-[System.Serializable]
-public class InventorySlot
+
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public ItemData item;
-    public int count;
+    public Image icon;
+    public string description;
 
-    public void AddItem(ItemData newItem)
+    public void SetItem(Sprite itemIcon, string itemDescription)
     {
-        if (item == newItem && item.isStackable)
-            count++;
-        else
-        {
-            item = newItem;
-            count = 1;
-        }
+        icon.sprite = itemIcon;
+        icon.enabled = true;
+        description = itemDescription;
+
     }
 
     public void Clear()
     {
-        item = null;
-        count = 0;
+        icon.sprite = null;
+        icon.enabled = false;
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ToolTipUi.instance.ShowTooltip(description, transform.position);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToolTipUi.instance.HideTooltip();
     }
 }

@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject slotPrefab;  // 슬롯 프리팹 연결
-    public Transform slotParent;   // Grid Layout Group이 붙은 오브젝트
-
-    public int slotCount = 20;     // 인벤토리 칸 수
-    private List<InventorySlotUi> slotUIs = new List<InventorySlotUi>();
+    public InventorySlot[] slots;
 
     void Start()
     {
-        for (int i = 0; i < slotCount; i++)
-        {
-            GameObject obj = Instantiate(slotPrefab, slotParent); // 자동으로 배치됨
-            InventorySlotUi slot = obj.GetComponent<InventorySlotUi>();
-            slotUIs.Add(slot);
+        Inventory.instance.OnItemAdded += AddItemToUI;
+        inventoryClear();
+    }
 
-            // 일단 비워두기
-            slot.UpdateSlot(null, 0);
+    void AddItemToUI(ItemData item)
+    {
+        foreach (var slot in slots)
+        {
+            if (!slot.icon.enabled) // 비어있는 슬롯이면
+            {
+                Debug.Log("획득 아이템:");
+                Debug.Log(item.name);
+                slot.SetItem(item.icon,item.description);
+                break;
+            }
         }
     }
 
-    public void UpdateInventory(List<InventorySlot> data)
+    void inventoryClear()
     {
-        for (int i = 0; i < data.Count; i++)
+        foreach (var slot in slots)
         {
-            slotUIs[i].UpdateSlot(data[i].item, data[i].count);
+            slot.Clear();
         }
     }
 }

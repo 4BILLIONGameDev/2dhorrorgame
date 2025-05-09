@@ -1,42 +1,23 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    public List<InventorySlot> slots = new List<InventorySlot>();
 
-    public ItemData TestItem;
+    public List<ItemData> items = new List<ItemData>();
+
+    public event Action<ItemData> OnItemAdded; // <- UI에 알리는 이벤트
+
     void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
-
-
-        Add(TestItem);
+        instance = this;
     }
 
-    public void Add(ItemData item)
+    public void AddItem(ItemData newItem)
     {
-        foreach (InventorySlot slot in slots)
-        {
-            if (slot.item == item && item.isStackable)
-            {
-                slot.count++;
-                return;
-            }
-        }
-
-        // 빈 슬롯 찾기
-        foreach (InventorySlot slot in slots)
-        {
-            if (slot.item == null)
-            {
-                slot.AddItem(item);
-                return;
-            }
-        }
+        items.Add(newItem);
+        OnItemAdded?.Invoke(newItem); // UI에게 알림 보내기
     }
 }

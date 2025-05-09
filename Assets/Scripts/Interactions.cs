@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
-public class Interactions : MonoBehaviour
+public class Interactions : MonoBehaviour , IInteractable2D
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ItemData itemData;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public void OnInteract()
+{
+    Debug.Log($"플레이어가 {itemData.itemName} 을(를) 주웠다!");
+    Inventory.instance.AddItem(itemData);
+    Destroy(gameObject); // 또는 인벤토리에 등록
+}
 }

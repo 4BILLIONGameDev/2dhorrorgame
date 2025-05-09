@@ -10,18 +10,25 @@ public class Player : MonoBehaviour
     public float blockSize = 1f;  // 블럭 크기 (1칸)
     public GameObject inventoryUI;
 
-
-
     private IInteractable2D currentInteractTarget = null;
     private Rigidbody2D rigidbody;
+
+
     private Vector2 inputDirection;
     private Animator animator;
+    private BoxCollider2D boxCollider;
     private bool isMoving = false;
+    Quaternion fixedRotation;
 
     void Start()
     {
+        fixedRotation = Quaternion.identity;
         rigidbody = GetComponent<Rigidbody2D>();
-        animator = transform.Find("Sprite").GetComponent<Animator>();
+        boxCollider = transform.Find("Fixed").GetComponent<BoxCollider2D>();
+        animator = transform.Find("Fixed").GetComponent<Animator>();
+        inventoryUI.SetActive(false);
+
+
     }
 
     void Update()
@@ -50,7 +57,10 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    void LateUpdate()
+    {
+        
+    }
     IEnumerator MoveByBlock(Vector2 moveDirection)
     {
         if (moveDirection.x > 0)
@@ -105,17 +115,20 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        var interactable = other.GetComponent<IInteractable2D>();
+        var interactable = other.GetComponent<Interactions>();
+        Debug.Log(interactable);
         if (interactable != null)
         {
             currentInteractTarget = interactable;
+            Debug.Log(currentInteractTarget + "타겟 설정");
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        var interactable = other.GetComponent<IInteractable2D>();
-        if (interactable != null && interactable == currentInteractTarget)
+        var interactable = other.GetComponent<Interactions>();
+        Debug.Log("벗어남");
+        if (interactable != null)
         {
             currentInteractTarget = null;
         }
@@ -124,37 +137,19 @@ public class Player : MonoBehaviour
     void interact()
     {
 
-
-        Vector2 lookDirection = transform.right.normalized; // 머리 방향 기준
-        Vector2 center = (Vector2)transform.position + lookDirection * 1.2f;
-
-        Collider2D hit = Physics2D.OverlapCircle(center, 0.5f); // 반지름 0.5 정도
-
-        Debug.DrawLine(transform.position, center, Color.green, 0.2f);
-        Debug.DrawRay(center, Vector2.up * 0.1f, Color.cyan, 0.2f); // 검사 중심 표시
-
-        if (hit != null)
+        if (currentInteractTarget != null)
         {
-            var interactable = hit.GetComponent<IInteractable2D>();
-            if (interactable != null)
-            {
-                interactable.OnInteract();
-                Debug.Log("인터랙션 성공: " + hit.name);
-            }
-            else
-            {
-                Debug.Log("인터페이스 없음: " + hit.name);
-            }
+            currentInteractTarget.OnInteract();
+           //ug.Log("인터랙션 성공: " + hit.name);
         }
         else
         {
-            Debug.Log("앞에 아무것도 없어~");
+          //Debug.Log("인터페이스 없음: " + hit.name);
         }
     }
 
     void inventoryShow()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
-
     }
 }
