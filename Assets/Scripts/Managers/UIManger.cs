@@ -8,12 +8,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public GameObject optionOverlay;
-    private bool isOptionOpen = false;
-
     public Toggle fullscreenToggle;
-
     public GameObject saveLoadUIPrefab;
 
+    private bool isOptionOpen = false;
     private GameObject currentUIInstance;
     private void Awake()
     {
@@ -51,6 +49,15 @@ public class UIManager : MonoBehaviour
         if (canvas != null)
         {
             currentUIInstance = Instantiate(saveLoadUIPrefab, canvas.transform);
+
+            // 위치 보정
+            RectTransform rt = currentUIInstance.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                rt.anchoredPosition = Vector2.zero; // 중앙 정렬
+                rt.localScale = Vector3.one; // 스케일 초기화
+                rt.localRotation = Quaternion.identity; // 회전 초기화
+            }
         }
         else
         {
