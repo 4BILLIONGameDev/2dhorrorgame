@@ -108,7 +108,7 @@ public class SoundManager : MonoBehaviour
         if (bgmSource != null)
         {
             if (isBGMMuted)
-                bgmSource.volume = 0f * master;           
+                bgmSource.volume = 0f * master;
             else
                 bgmSource.volume = bgmVolume * master;
         }
