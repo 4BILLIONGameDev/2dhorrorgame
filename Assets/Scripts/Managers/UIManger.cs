@@ -43,17 +43,6 @@ public class UIManager : MonoBehaviour
         }
     }
     //옵션 UI
-    public void OnStartButtonClicked()//시작버튼
-    {
-        Debug.Log("게임 시작 버튼 클릭!");
-        // "GameScene"으로 씬 전환
-        SceneManager.LoadScene("Gameplay");
-    }
-    public void OnExitButtonClicked()//종료버튼
-    {
-        Debug.Log("게임 종료 버튼 클릭!");
-        Application.Quit();
-    }
     public void ToggleOptionPanel()//옵션
     {
         isOptionOpen = !isOptionOpen;
