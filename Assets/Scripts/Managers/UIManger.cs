@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public GameObject optionOverlay;
-    public Toggle fullscreenToggle;
     public GameObject saveLoadUIPrefab;
 
     private bool isOptionOpen = false;
@@ -26,8 +25,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        fullscreenToggle.isOn = Screen.fullScreen; // 현재 상태 반영
-        fullscreenToggle.onValueChanged.AddListener(SetFullscreen); // 연결
         optionOverlay.SetActive(false);
 
     }
@@ -43,17 +40,6 @@ public class UIManager : MonoBehaviour
         }
     }
     //옵션 UI
-    public void OnStartButtonClicked()//시작버튼
-    {
-        Debug.Log("게임 시작 버튼 클릭!");
-        // "GameScene"으로 씬 전환
-        SceneManager.LoadScene("Gameplay");
-    }
-    public void OnExitButtonClicked()//종료버튼
-    {
-        Debug.Log("게임 종료 버튼 클릭!");
-        Application.Quit();
-    }
     public void ToggleOptionPanel()//옵션
     {
         isOptionOpen = !isOptionOpen;
