@@ -10,9 +10,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmSource;
     public AudioSource sfxSource;
 
-    private Slider masterSlider, bgmSlider, sfxSlider;
-    private TextMeshProUGUI masterText, bgmText, sfxText;
-
+    public TextMeshProUGUI masterText;
+    public TextMeshProUGUI bgmText;
+    public TextMeshProUGUI sfxText;
 
     private float masterVolume = 1f;
     private float bgmVolume = 1f;
@@ -29,46 +29,41 @@ public class SoundManager : MonoBehaviour
     }
 
     private void Start()
-    {   // 슬라이더, 텍스트 자동 참조 (오브젝트에 이름 주의)
-        masterSlider = GameObject.Find("masterVolume").GetComponent<Slider>();
-        bgmSlider = GameObject.Find("bgmVolume").GetComponent<Slider>();
-        sfxSlider = GameObject.Find("sfxVolume").GetComponent<Slider>();
-
-        masterText = GameObject.Find("MasterText").GetComponent<TextMeshProUGUI>();
-        bgmText = GameObject.Find("BGMText").GetComponent<TextMeshProUGUI>();
-        sfxText = GameObject.Find("SFXText").GetComponent<TextMeshProUGUI>();
-        // 초기값 반영
+    {         // 초기값 반영
         ApplyVolumes();
         UpdateVolumeTexts();
 
 
     }
 
-    public void SetMasterVolume(float volume)// 사운드 슬라이스 시작
+    public void OnMasterVolumeChanged(float value)
     {
-        masterVolume = Mathf.Clamp01(volume);
+        masterVolume = Mathf.Clamp01(value);
         ApplyVolumes();
-    }
 
-    public void SetBGMVolume(float volume)
+        if (masterText != null)
+            masterText.text = Mathf.RoundToInt(masterVolume * 100).ToString();
+    }
+    public void OnBGMVolumeChanged(float value)
     {
-        bgmVolume = Mathf.Clamp01(volume);
+        bgmVolume = Mathf.Clamp01(value);
         ApplyVolumes();
-        UpdateVolumeTexts();
-    }
 
-    public void SetSFXVolume(float volume)
+        if (bgmText != null)
+            bgmText.text = Mathf.RoundToInt(bgmVolume * 100).ToString();
+    }
+   public void OnSFXVolumeChanged(float value)
     {
-        sfxVolume = Mathf.Clamp01(volume);
+        sfxVolume = Mathf.Clamp01(value);
         ApplyVolumes();
-        UpdateVolumeTexts();
-    }
 
+        if (sfxText != null)
+            sfxText.text = Mathf.RoundToInt(sfxVolume * 100).ToString();
+    }
     public void ToggleMasterMute(bool isMuted)//사운드 토글
     {
         isMasterMuted = isMuted;
         ApplyVolumes();
-        UpdateVolumeTexts();
     }
 
     public void ToggleBGMMute(bool isMuted)
@@ -111,12 +106,12 @@ public class SoundManager : MonoBehaviour
     private void UpdateVolumeTexts()
     {
         if (masterText != null)
-            masterText.text = Mathf.RoundToInt(masterVolume * 100).ToString();
+            masterText.text = Mathf.FloorToInt(masterVolume * 100).ToString();
 
         if (bgmText != null)
-            bgmText.text = Mathf.RoundToInt(bgmVolume * 100).ToString();
+            bgmText.text = Mathf.FloorToInt(bgmVolume * 100).ToString();
 
         if (sfxText != null)
-            sfxText.text = Mathf.RoundToInt(sfxVolume * 100).ToString();
+            sfxText.text = Mathf.FloorToInt(sfxVolume * 100).ToString();
     }
 }

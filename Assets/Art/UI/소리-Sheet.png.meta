@@ -142,9 +142,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 39
-        width: 16
-        height: 37
+        y: 0
+        width: 130
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,94 +158,10 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: "\uC18C\uB9AC-Sheet_1"
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 14
-        width: 52
-        height: 87
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d4f55fe62d79a3b40800000000000000
-      internalID: 5420812031554314061
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC18C\uB9AC-Sheet_2"
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 29
-        width: 12
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b6103dc01f6197240800000000000000
-      internalID: 4789884903243317611
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC18C\uB9AC-Sheet_3"
-      rect:
-        serializedVersion: 2
-        x: 89
-        y: 14
-        width: 22
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4687cd942bf01aec0800000000000000
-      internalID: -3557544972228200348
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC18C\uB9AC-Sheet_4"
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 0
-        width: 21
-        height: 120
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8d9e3e02a01c29bd0800000000000000
-      internalID: -2624823383557936680
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 363010f875405d74bb0bd3bc0671a829
     internalID: 0
     vertices: []
     indices: 
@@ -254,10 +170,6 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       "\uC18C\uB9AC-Sheet_0": -3943892493491457070
-      "\uC18C\uB9AC-Sheet_1": 5420812031554314061
-      "\uC18C\uB9AC-Sheet_2": 4789884903243317611
-      "\uC18C\uB9AC-Sheet_3": -3557544972228200348
-      "\uC18C\uB9AC-Sheet_4": -2624823383557936680
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
