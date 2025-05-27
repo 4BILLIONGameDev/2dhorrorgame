@@ -144,13 +144,13 @@ TextureImporter:
       name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_0"
       rect:
         serializedVersion: 2
-        x: 335
-        y: 412
-        width: 579
-        height: 37
+        x: 336
+        y: 416
+        width: 577
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 6, z: 4, w: 5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -165,13 +165,13 @@ TextureImporter:
       name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_1"
       rect:
         serializedVersion: 2
-        x: 334
-        y: 348
-        width: 661
-        height: 42
+        x: 336
+        y: 350
+        width: 576
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 85, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -186,13 +186,13 @@ TextureImporter:
       name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_2"
       rect:
         serializedVersion: 2
-        x: 335
-        y: 218
-        width: 580
-        height: 94
+        x: 336
+        y: 282
+        width: 576
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 59, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -207,13 +207,13 @@ TextureImporter:
       name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_3"
       rect:
         serializedVersion: 2
-        x: 332
-        y: 173
-        width: 423
-        height: 41
+        x: 336
+        y: 174
+        width: 416
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 40, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -228,19 +228,61 @@ TextureImporter:
       name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_4"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 27
-        width: 1000
-        height: 95
+        x: 464
+        y: 58
+        width: 38
+        height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 404, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: adc36cf04ad44fd4685b455653158265
       internalID: 1526374509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_5"
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 11
+        width: 1
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d81994eaed27741499b546afb69d7788
+      internalID: -156185471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC778\uD130\uD398\uC774\uC2A41-Sheet_6"
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 57
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef5652cec30a3f4285c003af9bd18da
+      internalID: 511332081
       vertices: []
       indices: 
       edges: []
@@ -261,6 +303,8 @@ TextureImporter:
       "\uC778\uD130\uD398\uC774\uC2A41-Sheet_2": -2027488040
       "\uC778\uD130\uD398\uC774\uC2A41-Sheet_3": -43909613
       "\uC778\uD130\uD398\uC774\uC2A41-Sheet_4": 1526374509
+      "\uC778\uD130\uD398\uC774\uC2A41-Sheet_5": -156185471
+      "\uC778\uD130\uD398\uC774\uC2A41-Sheet_6": 511332081
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
