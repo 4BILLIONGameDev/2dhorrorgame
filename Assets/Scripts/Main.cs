@@ -16,11 +16,18 @@ public class Main : MonoBehaviour
     {
         
     }
-    public void OnStartButtonClicked()//시작버튼
+    public void OnStartButtonClicked()
     {
         Debug.Log("게임 시작 버튼 클릭!");
-        // "GameScene"으로 씬 전환
-        SceneManager.LoadScene("Gameplay");
+
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ShowSaveLoadUI();
+        }
+        else
+        {
+            Debug.LogError("UIManager 인스턴스가 없습니다.");
+        }
     }
     public void OnExitButtonClicked()//종료버튼
     {

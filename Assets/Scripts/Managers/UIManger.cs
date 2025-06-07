@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private GameObject currentUIInstance;
     private void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
@@ -22,7 +23,7 @@ public class UIManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
+    
     private void Start()
     {
         optionOverlay.SetActive(false);
@@ -30,7 +31,7 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
-        // InputManager에서 ESC 키 입력 감지
+        /* InputManager에서 ESC 키 입력 감지
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (currentUIInstance == null)
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
             else
                 CloseSaveLoadUI();
         }
+        */
     }
     //옵션 UI
     public void ToggleOptionPanel()//옵션
